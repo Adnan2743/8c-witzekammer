@@ -13,11 +13,14 @@
         .result {
             margin-top: 20px;
         }
+        .voted {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Abstimmung: wer ist der mieseste aus der klasse?</h1>
+    <h1>Abstimmung: Wer ist der mieseste aus der Klasse?</h1>
 
     <form id="votingForm">
         <label>
@@ -32,12 +35,17 @@
         <label>
             <input type="radio" name="vote" value="rayane"> rayane
         </label><br>
-        <button type="button" onclick="submitVote()">Abstimmen</button>
+        <button type="button" onclick="submitVote()" id="voteButton">Abstimmen</button>
     </form>
 
     <div class="result" id="result" style="display: none;">
         <h2>Ergebnisse der Abstimmung</h2>
         <p id="resultText"></p>
+    </div>
+
+    <div class="voted" id="votedMessage">
+        <h3>Du hast bereits abgestimmt! Hier sind die aktuellen Ergebnisse:</h3>
+        <div id="resultTextAfterVote"></div>
     </div>
 
     <script>
@@ -49,36 +57,63 @@
             "rayane": 0
         };
 
+        // Überprüfe, ob der Benutzer bereits abgestimmt hat
+        const userVote = localStorage.getItem('userVote');
+        if (userVote) {
+            document.getElementById('votedMessage').style.display = 'block';
+            showResults();
+        }
+
         function submitVote() {
             // Finde das gewählte Element
             const form = document.getElementById('votingForm');
             const selectedOption = form.querySelector('input[name="vote"]:checked');
 
             if (selectedOption) {
+                // Speichern der Stimme im lokalen Speicher
+                localStorage.setItem('userVote', selectedOption.value);
+                
                 // Zähle die Stimme
                 votes[selectedOption.value]++;
-
-                // Berechne die Gesamtzahl der abgegebenen Stimmen
-                const totalVotes = votes["xavier"] + votes["damian"] + votes["miran"] + votes["rayane"];
                 
-                // Berechne die Prozentsätze
-                let resultText = '';
-                for (const person in votes) {
-                    const percentage = (votes[person] / totalVotes * 100).toFixed(2);
-                    resultText += `${person}: ${votes[person]} Stimmen (${percentage}%)<br>`;
-                }
-
+                // Deaktiviere den Abstimmungsbutton, um weitere Abstimmungen zu verhindern
+                document.getElementById('voteButton').disabled = true;
+                document.getElementById('votedMessage').style.display = 'block';
+                
                 // Zeige die Ergebnisse an
-                document.getElementById('resultText').innerHTML = resultText;
-                document.getElementById('result').style.display = 'block';
+                showResults();
             } else {
                 alert('Bitte wählen Sie eine Option.');
             }
+        }
+
+        function showResults() {
+            // Berechne die Gesamtzahl der abgegebenen Stimmen
+            const totalVotes = votes["xavier"] + votes["damian"] + votes["miran"] + votes["rayane"];
+            
+            // Berechne die Prozentsätze
+            let resultText = '';
+            for (const person in votes) {
+                const percentage = (votes[person] / totalVotes * 100).toFixed(2);
+                resultText += `${person}: ${votes[person]} Stimmen (${percentage}%)<br>`;
+            }
+
+            // Zeige die Ergebnisse an
+            if (userVote) {
+                // Wenn der Benutzer bereits abgestimmt hat, zeigen wir seine Wahl an
+                const voteMessage = `Du hast für ${userVote} abgestimmt.`;
+                document.getElementById('resultTextAfterVote').innerHTML = voteMessage + "<br>" + resultText;
+            } else {
+                // Zeige die Ergebnisse nach der Abstimmung
+                document.getElementById('resultText').innerHTML = resultText;
+            }
+            document.getElementById('result').style.display = 'block';
         }
     </script>
 
 </body>
 </html>
+
 
 
   
