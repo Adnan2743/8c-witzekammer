@@ -43,10 +43,10 @@
     <script>
         // Initialisiere die Abstimmungsergebnisse
         let votes = {
-            "Apfel": 0,
-            "Banane": 0,
-            "Orange": 0,
-            "Traube": 0
+            "xavier": 0,
+            "damian": 0,
+            "miran": 0,
+            "rayane": 0
         };
 
         function submitVote() {
@@ -58,12 +58,14 @@
                 // Zähle die Stimme
                 votes[selectedOption.value]++;
 
+                // Berechne die Gesamtzahl der abgegebenen Stimmen
+                const totalVotes = votes["xavier"] + votes["damian"] + votes["miran"] + votes["rayane"];
+                
                 // Berechne die Prozentsätze
-                const totalVotes = votes["Apfel"] + votes["Banane"] + votes["Orange"] + votes["Traube"];
                 let resultText = '';
-                for (const fruit in votes) {
-                    const percentage = (votes[fruit] / totalVotes * 100).toFixed(2);
-                    resultText += `${fruit}: ${percentage}%<br>`;
+                for (const person in votes) {
+                    const percentage = (votes[person] / totalVotes * 100).toFixed(2);
+                    resultText += `${person}: ${votes[person]} Stimmen (${percentage}%)<br>`;
                 }
 
                 // Zeige die Ergebnisse an
@@ -77,6 +79,7 @@
 
 </body>
 </html>
+
 
   
   <img src="https://i.pinimg.com/736x/d3/79/cd/d379cd87f90ddedf9d1df3167de885fa.jpg" alt="camel orange meme is still massive" width=300px>
