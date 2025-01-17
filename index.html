@@ -1,0 +1,114 @@
+<h1> 8c witzekammer</h1>
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abstimmung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Abstimmung: wer ist der mieseste aus der klasse?</h1>
+    <form id="voteForm">
+        <label>
+            <input type="radio" name="fruit" value="xavier"> xavier
+        </label><br>
+        <label>
+            <input type="radio" name="fruit" value="miran"> miran
+        </label><br>
+        <label>
+            <input type="radio" name="fruit" value="berksu"> berksu
+        </label><br><br>
+        <button type="submit">Abstimmen</button>
+    </form>
+
+    <div class="result" id="result" style="display:none;">
+        <h2>Ergebnisse:</h2>
+        <p>Apfel: <span id="apfelPercentage">0</span>% (<span id="apfelVotes">0</span> Stimmen)</p>
+        <p>Banane: <span id="bananePercentage">0</span>% (<span id="bananeVotes">0</span> Stimmen)</p>
+        <p>Orange: <span id="orangePercentage">0</span>% (<span id="orangeVotes">0</span> Stimmen)</p>
+        <p>Gesamtanzahl der Abstimmungen: <span id="totalVotes">0</span></p>
+    </div>
+
+    <script>
+        let apfelVotes = 0;
+        let bananeVotes = 0;
+        let orangeVotes = 0;
+        let totalVotes = 0;
+
+        document.getElementById('voteForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Verhindert das Neuladen der Seite beim Absenden des Formulars
+
+            const formData = new FormData(this);
+            const selectedVote = formData.get('fruit');
+
+            // Zählt die Stimmen
+            if (selectedVote === 'Apfel') {
+                apfelVotes++;
+            } else if (selectedVote === 'Banane') {
+                bananeVotes++;
+            } else if (selectedVote === 'Orange') {
+                orangeVotes++;
+            }
+
+            totalVotes++;
+
+            // Berechnet die Prozentsätze
+            const apfelPercentage = ((apfelVotes / totalVotes) * 100).toFixed(2);
+            const bananePercentage = ((bananeVotes / totalVotes) * 100).toFixed(2);
+            const orangePercentage = ((orangeVotes / totalVotes) * 100).toFixed(2);
+
+            // Aktualisiert die Anzeige der Ergebnisse
+            document.getElementById('apfelVotes').innerText = apfelVotes;
+            document.getElementById('bananeVotes').innerText = bananeVotes;
+            document.getElementById('orangeVotes').innerText = orangeVotes;
+            document.getElementById('totalVotes').innerText = totalVotes;
+            document.getElementById('apfelPercentage').innerText = apfelPercentage;
+            document.getElementById('bananePercentage').innerText = bananePercentage;
+            document.getElementById('orangePercentage').innerText = orangePercentage;
+
+            // Zeigt die Ergebnisse an
+            document.getElementById('result').style.display = 'block';
+
+            // Verhindert, dass die Ergebnisse erneut angezeigt werden, wenn der Benutzer die Seite neu lädt.
+            document.getElementById('voteForm').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
+  
+  <img src="https://i.pinimg.com/736x/d3/79/cd/d379cd87f90ddedf9d1df3167de885fa.jpg" alt="camel orange meme is still massive" width=300px>
+
+<img src="https://s7d1.scene7.com/is/image/mcdonalds/PRODUCTS-HERO-WEBSITE_832x472-CheeseburgerSingle:nutrition-calculator-tile?wid=472&hei=472&dpr=off" alt="zeesburger"width=200px >
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hintergrund mit Bild</title>
+    <style>
+        body {
+            background-image: url("https://img.freepik.com/fotos-kostenlos/aesthetische-tapete-rosa-rauchhintergrund_53876-133410.jpg"); /* Bild-URL */
+            background-size: cover; /* Bild wird über die gesamte Fläche gedehnt */
+            background-position: center; /* Bild wird zentriert */
+            background-repeat: no-repeat; /* Verhindert Wiederholung des Bildes */
+        }
+    </style>
+</head>
+<body>
+    <h1> </h1>
+    <p></p>
+</body>
+</html>
+
+<marquee>nigesfoxx............. wochentage auf französisch</marquee>
